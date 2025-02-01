@@ -1,0 +1,28 @@
+from utility.configurations import *
+import json
+
+import requests
+
+def AddBookPayLoad(isbn):
+   load = {
+       "name": "Learn Appium Automation with python",
+       "isbn": isbn,
+       "aisle": "2327",
+       "author": "Narendra Parasa"
+   }
+   return load
+
+
+
+
+
+def buildPayLoadFromDb(query):
+    addBody = {}
+    tp = getQuery(query)
+    addBody['name'] = tp[0]
+    addBody['isbn'] = tp[1]
+    addBody['aisle'] = tp[2]
+    addBody['author'] = tp[3]
+    return addBody
+
+
