@@ -1,0 +1,37 @@
+/* post api
+import requests
+import configparser
+from payload import *
+from utility.configurations import *
+from utility.resources import *
+import json
+url = getConfig()['API']['endpoint'] + ApiResources.addbook_response
+headers = {"Content-Type" : "application/json"}
+query = 'select * from Books'
+addbook_response=requests.post(url,verify=False,json=buildPayLoadFromDb(query),headers= headers)
+print(addbook_response.json())
+delete_book = requests.post("http://216.10.245.166/Library/DeleteBook.php", json=
+{
+    "ID": "bnid3475"
+}, headers={"Content-Type" : "application/json"},)
+assert delete_book.status_code == 200
+res_json = delete_book.json()
+print(res_json["msg"])
+assert res_json["msg"] == "book is successfully deleted"
+
+#Authenication
+se = requests.session()
+se.auth = auth=('parasanarendra1',getPassword())
+
+url = "https://api.github.com/user"
+github_response = requests.get(url, auth=('parasanarendra1',getPassword()))
+print(github_response.status_code)
+
+url1 = "https://api.github.com/user/repos"
+response = se.get(url1)
+print(response.status_code)
+
+
+
+
+#verify = Flase is used for slove the ssh failure errors
