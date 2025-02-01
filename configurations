@@ -1,0 +1,36 @@
+import configparser
+
+import mysql.connector
+from mysql.connector import Error
+
+def getConfig():
+    config = configparser.ConfigParser()
+    config.read('utility\propertites.ini')
+    return config
+
+connect_config = {
+    'user' : getConfig()['SQL']['user'],
+    'password' : getConfig()['SQL']['password'],
+    'host' : getConfig()['SQL']['host'],
+    'database' : getConfig()['SQL']['database']
+}
+
+def getPassword():
+    return "Narendra073@"
+
+def getConnection():
+    try:
+        con = mysql.connector.connect(**connect_config)
+        if con.is_connected():
+            print("Connection is successfully")
+            return con
+    except Error as e:
+        print(e)
+
+def getQuery(query):
+    con = getConnection()
+    cursor = con.cursor()
+    cursor.execute(query)
+    row = cursor.fetchone()
+    con.close()
+    return row
