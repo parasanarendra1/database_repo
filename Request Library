@@ -1,0 +1,29 @@
+import requests
+import json
+
+response = requests.get('http://216.10.245.166/Library/GetBook.php',
+             params={'AuthorName':'Narendra Parasa'},)
+# print(response.text)
+# dict_response = json.loads(response.text)
+#
+
+response_json = response.json()
+print(type(response_json))
+print(response_json[0]['isbn'])
+assert response.status_code == 200
+print(response.headers)
+print(response.cookies)
+assert response.headers['Content-Type'] == 'application/json;charset=UTF-8'
+
+for actualbook in response_json:
+    if actualbook['isbn'] == 'bcz888effed':
+        print(actualbook)
+        break
+
+
+expectedBook = {
+        "book_name": "learning automatiion with python",
+        "isbn": "bcz888effed",
+        "aisle": "20027"
+    }
+assert actualbook == expectedBook
