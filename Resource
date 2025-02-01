@@ -1,0 +1,5 @@
+
+
+class ApiResources:
+    addbook_response = '/Library/Addbook.php'
+    delete_book = '/Library/DeleteBook.php'
